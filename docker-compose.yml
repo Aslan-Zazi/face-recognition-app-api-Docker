@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+    # Backend API
+    face-recognition-api:
+        container_name: backend
+        build: ./
+        command: npm start
+        working_dir: /user/src/face-recognition-api
+        environment:
+            POSTGRES_URI: postgres://aslan:11092002@postgres:5432/face-recognition-docker
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./:/user/src/face-recognition-api
+
+    # Postgres
+    postgres:
+        environment:
+            POSTGRES_USER: aslan
+            POSTGRES_PASSWORD: 11092002
+            # POSTGRES_URL: postgres://aslan:11092002@localhost:5432/face-recognition-docker
+            POSTGRES_DB: face-recognition-docker
+            POSTGRES_HOST: postgres
+        build: ./postgres
+        ports:
+            - "5431:5432"
+
