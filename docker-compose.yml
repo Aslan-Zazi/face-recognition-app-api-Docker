@@ -9,6 +9,7 @@ services:
         working_dir: /user/src/face-recognition-api
         environment:
             POSTGRES_URI: postgres://aslan:11092002@postgres:5432/face-recognition-docker
+            REDIS_URI: redis://redis-cache:6379
         ports:
             - "3000:3000"
         volumes:
@@ -26,3 +27,9 @@ services:
         ports:
             - "5431:5432"
 
+    # Redis
+    redis:
+        container_name: redis-cache
+        image: redis:latest
+        ports:
+            - "6379:6379"
